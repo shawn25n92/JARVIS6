@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace JARVIS6
 {
-    class Program
+    public class JARVISConfig
     {
-        static void Main(string[] args)
+        public JARVISConfig()
         {
 
         }

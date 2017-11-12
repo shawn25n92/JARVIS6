@@ -57,6 +57,19 @@ namespace JARVIS6
             }
             return SO;
         }
+        public StatusObject ExecuteNonReaderQueryFromFile(string FileDirectory)
+        {
+            StatusObject SO = new StatusObject();
+            try
+            {
+
+            }
+            catch(Exception e)
+            {
+
+            }
+            return SO;
+        }
         public StatusObject ExecuteReaderQuery(string Query,  params string[] FunctionsToExecute)
         {
             StatusObject SO = new StatusObject();

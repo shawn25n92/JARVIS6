@@ -46,6 +46,7 @@
     <Compile Include="JARVISConfig.cs" />
     <Compile Include="JARVISCryptography.cs" />
     <Compile Include="JARVISDataSource.cs" />
+    <Compile Include="JARVISFile.cs" />
     <Compile Include="JARVISRuntime.cs" />
     <Compile Include="JARVISWeb.cs" />
     <Compile Include="Program.cs" />

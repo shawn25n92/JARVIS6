@@ -59,18 +59,17 @@ namespace JARVIS6
                 {
                     Permutations = Permutations.SelectMany(x => Target, (x, y) => x + y);
                 }
-                string TableName = String.Format("RAINBOW_{0}_{1}", (int)NewFirstCharacter, WordLength);
                 // TODO Replace Files before Writing to Them
                 int PermutationCount = 0;
                 foreach (var Permutation in Permutations)
                 {
                     if (Permutation.ToCharArray()[0] == NewFirstCharacter)
                     {
-                        PermutationCount++;
-                        int PermutationRange = PermutationCount / 1000000;
+                        int PermutationRange = (PermutationCount / 1000000) + 1;
+                        string TableName = String.Format("RAINBOW_{0}_{1}_{2}", (int)NewFirstCharacter, WordLength, PermutationRange);
                         StreamWriter OutputFile = new StreamWriter(
                             String.Format(
-                                @"{0}\{1}_BATCH{2}.sql",
+                                @"{0}\{1}_{2}.sql",
                                 CryptographyRainbowTableScriptsPath,
                                 TableName,
                                 PermutationRange), append: true);
@@ -101,7 +100,12 @@ namespace JARVIS6
                                 );
                         OutputFile.WriteLine(Query);
                         OutputFile.Close();
+                        PermutationCount++;
                         Console.WriteLine(Query);
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
             }

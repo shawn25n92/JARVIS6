@@ -61,16 +61,23 @@ namespace JARVIS6
                 }
                 // TODO Replace Files before Writing to Them
                 int PermutationCount = 0;
+                DateTime StartTime = DateTime.Now;
+                Console.WriteLine("----------------------------------------------------------------");
+                Console.WriteLine("Start Script Generation. Start: {0}", StartTime);
+                Console.WriteLine("----------------------------------------------------------------");
                 foreach (var Permutation in Permutations)
                 {
                     if (Permutation.ToCharArray()[0] == NewFirstCharacter)
                     {
-                        int PermutationRange = (PermutationCount / 1000000) + 1;
-                        string TableName = String.Format("RAINBOW_{0}_{1}_{2}", (int)NewFirstCharacter, WordLength, PermutationRange);
+                        int PermutationRange = (PermutationCount / 10000) + 1;
+                        // Name tables based on permutations
+                        string TableName = String.Format("RAINBOW_{0}_{1}", (int)NewFirstCharacter, WordLength);
+                        string StorageDirectory = String.Format(@"{0}\RAINBOW_{1}", CryptographyRainbowTableScriptsPath, (int)NewFirstCharacter);
+                        Directory.CreateDirectory(StorageDirectory);
                         StreamWriter OutputFile = new StreamWriter(
                             String.Format(
                                 @"{0}\{1}_{2}.sql",
-                                CryptographyRainbowTableScriptsPath,
+                                StorageDirectory,
                                 TableName,
                                 PermutationRange), append: true);
                         MD5 MD5Calculator = MD5.Create();
@@ -108,6 +115,10 @@ namespace JARVIS6
                         break;
                     }
                 }
+                DateTime EndTime = DateTime.Now;
+                Console.WriteLine("----------------------------------------------------------------");
+                Console.WriteLine("End Script Generation. Start: {0}, End: {1}", StartTime, EndTime);
+                Console.WriteLine("----------------------------------------------------------------");
             }
             catch (Exception e)
             {

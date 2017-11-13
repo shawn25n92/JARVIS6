@@ -66,7 +66,7 @@ namespace JARVIS6
                 {
                     Permutations = Permutations.SelectMany(x => Target, (x, y) => x + y);
                 }
-                string TableName = String.Format("RAINBOW_{0}_{1}", NewFirstCharacter, WordLength);
+                string TableName = String.Format("RAINBOW_{0}_{1}", (int)NewFirstCharacter, WordLength);
                 // TODO Replace Files before Writing to Them
                 foreach (var Permutation in Permutations)
                 {

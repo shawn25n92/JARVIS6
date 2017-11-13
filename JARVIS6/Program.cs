@@ -39,10 +39,10 @@ namespace JARVIS6
                                     string FirstCharacter = CommandParameters.ElementAtOrDefault(2);
                                     string WordLength = CommandParameters.ElementAtOrDefault(3);
                                     JARVISCryptography cryptotools = new JARVISCryptography();
-                                    StatusObject SO_CreateRainbowTableScripts = cryptotools.CreateRainbowTableInsertStatements(FirstCharacter, WordLength);
-                                    if (SO_CreateRainbowTableScripts.Status == StatusCode.FAILURE)
+                                    StatusObject SO_GenerateInsertScripts = cryptotools.GenerateInsertScripts(FirstCharacter, WordLength);
+                                    if (SO_GenerateInsertScripts.Status == StatusCode.FAILURE)
                                     {
-                                        Console.WriteLine(SO_CreateRainbowTableScripts.ErrorStackTrace);
+                                        Console.WriteLine(SO_GenerateInsertScripts.ErrorStackTrace);
                                     }
                                 }
                             }

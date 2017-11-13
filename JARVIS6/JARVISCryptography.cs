@@ -13,7 +13,7 @@ namespace JARVIS6
     {
         private string CryptographyOutputPath = @"C:\JARVIS6\Cryptography";
         private string CryptographyRainbowTableScriptsPath = @"C:\JARVIS6\Cryptography\RainbowTableScripts";
-        private JARVISDataSource DataSource { get; set; }
+        private string CryptographyRainbowTableBatchScriptPath = @"C:\JARVIS6\Cryptography\RainbowTableBatchScripts";
         private Dictionary<string, string> SqlServerHashTypes = new Dictionary<string, string>()
         {
             {"MD5", "32"},
@@ -22,62 +22,55 @@ namespace JARVIS6
             {"SHA2_256", "64"},
             {"SHA2_512", "128"}
         };
-        private string ASCIICharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890~`!@#$%^&*()_+-={}[]:\"|;'\\<>?,./";
+        private string ASCIICharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890~`!@#$%^&*()_+-={}[]:\"|;'\\<>?,./ ";
         public JARVISCryptography()
         {
             try
             {
                 Directory.CreateDirectory(CryptographyOutputPath);
                 Directory.CreateDirectory(CryptographyRainbowTableScriptsPath);
+                Directory.CreateDirectory(CryptographyRainbowTableBatchScriptPath);
             }
             catch(Exception e)
             {
                 Console.WriteLine(e);
             }
         }
-        public StatusObject SetDataSource(string Server, string Database, string UserID, string Password)
+        public StatusObject GenerateBatchScripts (string WordLength)
         {
             StatusObject SO = new StatusObject();
-            try
-            {
-                
-            }
-            catch(Exception e)
-            {
-                SO = new StatusObject(e, "JARVISCRYPTOGRAPHY_SETDATASOURCE_01");
-            }
+
             return SO;
         }
-        public StatusObject CreateRainbowTableInsertStatements(string FirstCharacter, string WordLength)
+        public StatusObject GenerateInsertScripts(string FirstCharacter, string WordLength)
         {
             StatusObject SO = new StatusObject();
             try
             {
                 char[] Target = ASCIICharacters.ToCharArray();
-                char NewFirstCharacter = FirstCharacter.ToCharArray()[0];
+                char NewFirstCharacter = FirstCharacter == "space" ? ' ' : FirstCharacter.ToCharArray()[0];
                 char OldFirstCharacter = Target[0];
                 int Temp = Array.IndexOf(Target, NewFirstCharacter);
                 Target[0] = NewFirstCharacter;
                 Target[Temp] = OldFirstCharacter;
                 var Permutations = Target.Select(x => x.ToString());
                 int Length = Convert.ToInt32(WordLength);
-                BigInteger PermutationCount = BigInteger.Pow(Target.Length, Length);
                 for (int i = 0; i < Length - 1; i++)
                 {
                     Permutations = Permutations.SelectMany(x => Target, (x, y) => x + y);
                 }
                 string TableName = String.Format("RAINBOW_{0}_{1}", (int)NewFirstCharacter, WordLength);
                 // TODO Replace Files before Writing to Them
+                int PermutationCount = 0;
                 foreach (var Permutation in Permutations)
                 {
                     if (Permutation.ToCharArray()[0] == NewFirstCharacter)
                     {
-                        
-                        string PermutationRange = "";
-
+                        PermutationCount++;
+                        int PermutationRange = PermutationCount / 1000000;
                         StreamWriter OutputFile = new StreamWriter(
                             String.Format(
-                                @"{0}\{1}{2}.txt",
+                                @"{0}\{1}_BATCH{2}.sql",
                                 CryptographyRainbowTableScriptsPath,
                                 TableName,
                                 PermutationRange), append: true);
@@ -85,7 +78,7 @@ namespace JARVIS6
                         SHA1 SHA1Calculator = SHA1.Create();
                         SHA256 SHA256Calculator = SHA256.Create();
                         SHA512 SHA512Calculator = SHA512.Create();
-                        byte[] PermutationBytes = System.Text.Encoding.ASCII.GetBytes("MARINES_54");
+                        byte[] PermutationBytes = System.Text.Encoding.ASCII.GetBytes(Permutation);
                         byte[] PermutationMD5HashBytes = MD5Calculator.ComputeHash(PermutationBytes);
                         byte[] PermutationSHA1HashBytes = SHA1Calculator.ComputeHash(PermutationBytes);
                         byte[] PermutationSHA256HashBytes = SHA256Calculator.ComputeHash(PermutationBytes);

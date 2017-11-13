@@ -11,8 +11,8 @@ namespace JARVIS6
 {
     public class JARVISCryptography
     {
-        private string CryptographyOutputPath = @"D:\JARVIS6\Cryptography";
-        private string CryptographyRainbowTableScriptsPath = @"D:\JARVIS6\Cryptography\RainbowTableScripts";
+        private string CryptographyOutputPath = @"C:\JARVIS6\Cryptography";
+        private string CryptographyRainbowTableScriptsPath = @"C:\JARVIS6\Cryptography\RainbowTableScripts";
         private JARVISDataSource DataSource { get; set; }
         private Dictionary<string, string> SqlServerHashTypes = new Dictionary<string, string>()
         {
@@ -66,12 +66,13 @@ namespace JARVIS6
                 {
                     Permutations = Permutations.SelectMany(x => Target, (x, y) => x + y);
                 }
-
+                string TableName = String.Format("RAINBOW_{0}_{1}", NewFirstCharacter, WordLength);
+                // TODO Replace Files before Writing to Them
                 foreach (var Permutation in Permutations)
                 {
                     if (Permutation.ToCharArray()[0] == NewFirstCharacter)
                     {
-                        string TableName = String.Format("RAINBOW_{0}_{1}", (int)Permutation.ToCharArray()[0], Permutation.Length);
+                        
                         string PermutationRange = "";
 
                         StreamWriter OutputFile = new StreamWriter(

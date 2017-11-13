@@ -13,7 +13,7 @@ namespace JARVIS6
         {
             bool ProgramRunning = true;
             string UserInput = "";
-            string DefaultStartupMethod = "form";
+            string DefaultStartupMethod = "console";
             
             if (args.Length > 0)
             {
@@ -45,7 +45,6 @@ namespace JARVIS6
                                         Console.WriteLine(SO_CreateRainbowTableScripts.ErrorStackTrace);
                                     }
                                 }
-
                             }
                             else
                             {
@@ -67,8 +66,7 @@ namespace JARVIS6
             }
             else if (DefaultStartupMethod == "form")
             {
-                Application.Run(new JARVISMainWindow());
-                Environment.Exit(0);
+                
             }
         }
     }

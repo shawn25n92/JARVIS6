@@ -45,6 +45,13 @@ namespace JARVIS6
                                         Console.WriteLine(SO_GenerateInsertScripts.ErrorStackTrace);
                                     }
                                 }
+                                if(SecondaryCommand == "generateallscripts")
+                                {
+                                    string FirstCharacters = CommandParameters.ElementAtOrDefault(2);
+                                    string MinWordLength = CommandParameters.ElementAtOrDefault(3);
+                                    string MaxWordLength = CommandParameters.ElementAtOrDefault(4);
+                                    StatusObject SO_GenerateInsertScripts = cryptotools.GenerateScriptsInsertScriptsAllCharacters(FirstCharacters, MinWordLength, MaxWordLength);
+                                }
                             }
                             else
                             {

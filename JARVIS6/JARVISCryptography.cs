@@ -76,7 +76,7 @@ namespace JARVIS6
                         Directory.CreateDirectory(StorageDirectory);
                         StreamWriter OutputFile = new StreamWriter(
                             String.Format(
-                                @"{0}\{1}_{2}.sql",
+                                @"{0}\{1}_{2}.txt",
                                 StorageDirectory,
                                 TableName,
                                 PermutationRange), append: true);
@@ -131,20 +131,30 @@ namespace JARVIS6
             StatusObject SO = new StatusObject();
             return SO;
         }
-        public StatusObject SetDefaultDirectory()
+        public StatusObject GenerateScriptsInsertScriptsAllCharacters(string TargetString, string MinWordLength, string MaxWordLength)
         {
             StatusObject SO = new StatusObject();
             try
             {
-                string RootPath;
-                Console.WriteLine("-----------------------------------------------------------------");
-                Console.WriteLine("Set Up Directory");
-                Console.WriteLine("-----------------------------------------------------------------");
-
-
-                Console.WriteLine("-----------------------------------------------------------------");
-                Console.WriteLine("Set Up Directory");
-                Console.WriteLine("-----------------------------------------------------------------");
+                int Min = Convert.ToInt32(MinWordLength);
+                int Max = Convert.ToInt32(MaxWordLength);
+                for (int i = Min; i <= Max; i++)
+                {
+                    foreach (char FirstCharacter in ASCIICharacters)
+                    {
+                        StatusObject SO_GenerateScripts = GenerateInsertScripts(FirstCharacter.ToString(), i.ToString());
+                        if (SO_GenerateScripts.Status == StatusCode.FAILURE)
+                        {
+                            Console.WriteLine("-----------------------------------------------------------");
+                            Console.WriteLine("Error Encountered");
+                            Console.WriteLine(SO_GenerateScripts.ErrorStackTrace);
+                            Console.WriteLine("-----------------------------------------------------------");
+                            Console.ReadKey();
+                        }
+                    }
+                    
+                }
+                
             }
             catch(Exception e)
             {

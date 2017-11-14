@@ -33,12 +33,12 @@ namespace JARVIS6
                             string PrimaryCommand = CommandParameters.ElementAtOrDefault(0);
                             if (PrimaryCommand == "cryptography")
                             {
+                                JARVISCryptography cryptotools = new JARVISCryptography();
                                 string SecondaryCommand = CommandParameters.ElementAtOrDefault(1);
                                 if (SecondaryCommand == "generatescripts")
                                 {
                                     string FirstCharacter = CommandParameters.ElementAtOrDefault(2);
                                     string WordLength = CommandParameters.ElementAtOrDefault(3);
-                                    JARVISCryptography cryptotools = new JARVISCryptography();
                                     StatusObject SO_GenerateInsertScripts = cryptotools.GenerateInsertScripts(FirstCharacter, WordLength);
                                     if (SO_GenerateInsertScripts.Status == StatusCode.FAILURE)
                                     {

@@ -70,6 +70,20 @@ namespace JARVIS6
             }
             return SO;
         }
+        public StatusObject ExecuteNonReaderQueryFromFolder(string FolderPath)
+        {
+            StatusObject SO = new StatusObject();
+            try
+            {
+                // Get all SQL files from a particular directory.
+                // Execute the files
+            }
+            catch(Exception e)
+            {
+
+            }
+            return SO;
+        }
         public StatusObject ExecuteReaderQueryFromFile(string FileDirectory)
         {
             StatusObject SO = new StatusObject();

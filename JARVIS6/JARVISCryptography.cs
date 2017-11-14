@@ -11,9 +11,9 @@ namespace JARVIS6
 {
     public class JARVISCryptography
     {
-        private string CryptographyOutputPath = @"D:\JARVIS6\Cryptography";
-        private string CryptographyRainbowTableScriptsPath = @"D:\JARVIS6\Cryptography\RainbowTableScripts";
-        private string CryptographyRainbowTableBatchScriptPath = @"D:\JARVIS6\Cryptography\RainbowTableBatchScripts";
+        private string CryptographyOutputPath = @"C:\JARVIS6\Cryptography";
+        private string CryptographyRainbowTableScriptsPath = @"C:\JARVIS6\Cryptography\RainbowTableScripts";
+        private string CryptographyRainbowTableBatchScriptPath = @"C:\JARVIS6\Cryptography\RainbowTableBatchScripts";
         private Dictionary<string, string> SqlServerHashTypes = new Dictionary<string, string>()
         {
             {"MD5", "32"},
@@ -69,7 +69,7 @@ namespace JARVIS6
                 {
                     if (Permutation.ToCharArray()[0] == NewFirstCharacter)
                     {
-                        int PermutationRange = (PermutationCount / 10000) + 1;
+                        int PermutationRange = (PermutationCount / 100000) + 1;
                         // Name tables based on permutations
                         string TableName = String.Format("RAINBOW_{0}_{1}", (int)NewFirstCharacter, WordLength);
                         string StorageDirectory = String.Format(@"{0}\RAINBOW_{1}", CryptographyRainbowTableScriptsPath, (int)NewFirstCharacter);
@@ -140,7 +140,7 @@ namespace JARVIS6
                 int Max = Convert.ToInt32(MaxWordLength);
                 for (int i = Min; i <= Max; i++)
                 {
-                    foreach (char FirstCharacter in ASCIICharacters)
+                    foreach (char FirstCharacter in TargetString)
                     {
                         StatusObject SO_GenerateScripts = GenerateInsertScripts(FirstCharacter.ToString(), i.ToString());
                         if (SO_GenerateScripts.Status == StatusCode.FAILURE)
@@ -158,7 +158,7 @@ namespace JARVIS6
             }
             catch(Exception e)
             {
-
+                SO = new StatusObject(e, "");
             }
             return SO;
         }

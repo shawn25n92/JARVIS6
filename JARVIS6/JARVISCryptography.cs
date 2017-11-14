@@ -11,9 +11,9 @@ namespace JARVIS6
 {
     public class JARVISCryptography
     {
-        private string CryptographyOutputPath = @"C:\JARVIS6\Cryptography";
-        private string CryptographyRainbowTableScriptsPath = @"C:\JARVIS6\Cryptography\RainbowTableScripts";
-        private string CryptographyRainbowTableBatchScriptPath = @"C:\JARVIS6\Cryptography\RainbowTableBatchScripts";
+        private string CryptographyOutputPath = @"D:\JARVIS6\Cryptography";
+        private string CryptographyRainbowTableScriptsPath = @"D:\JARVIS6\Cryptography\RainbowTableScripts";
+        private string CryptographyRainbowTableBatchScriptPath = @"D:\JARVIS6\Cryptography\RainbowTableBatchScripts";
         private Dictionary<string, string> SqlServerHashTypes = new Dictionary<string, string>()
         {
             {"MD5", "32"},
@@ -129,6 +129,27 @@ namespace JARVIS6
         public StatusObject PopulateRainbowTable()
         {
             StatusObject SO = new StatusObject();
+            return SO;
+        }
+        public StatusObject SetDefaultDirectory()
+        {
+            StatusObject SO = new StatusObject();
+            try
+            {
+                string RootPath;
+                Console.WriteLine("-----------------------------------------------------------------");
+                Console.WriteLine("Set Up Directory");
+                Console.WriteLine("-----------------------------------------------------------------");
+
+
+                Console.WriteLine("-----------------------------------------------------------------");
+                Console.WriteLine("Set Up Directory");
+                Console.WriteLine("-----------------------------------------------------------------");
+            }
+            catch(Exception e)
+            {
+
+            }
             return SO;
         }
         public StatusObject ClearRainbowTable()

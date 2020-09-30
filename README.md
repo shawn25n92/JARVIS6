@@ -1,4 +1,4 @@
-# JARVIS6
+# JARVIS6 (Best AI Project For Intermediates)
 Rework of JARVIS5
 
 Rainbow table SQL script generation
